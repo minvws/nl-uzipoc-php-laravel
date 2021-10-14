@@ -1,0 +1,5 @@
+.editorconfig
+*.swp
+vendor/*
+ssl/*
+storage/*
