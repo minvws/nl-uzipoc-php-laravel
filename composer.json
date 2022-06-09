@@ -12,7 +12,7 @@
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "minvws/uzi-php-laravel": "@dev"
+        "minvws/uzi-php-laravel": "dev-main"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -61,11 +61,10 @@
     },
     "minimum-stability": "dev",
     "prefer-stable": true,
-    "repositories": [{
-        "type": "path",
-        "url": "../uzi-php-laravel",
-        "options": {
-            "symlink": true
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@github.com:minvws/nl-uzipoc-php-laravel-library.git"
         }
-    }]
+    ]
 }
