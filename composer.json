@@ -5,14 +5,19 @@
     "keywords": ["framework", "laravel"],
     "license": "MIT",
     "require": {
-        "php": "^7.3|^8.0",
-        "firebase/php-jwt": "^5.4",
+        "php": "^8.0",
         "fruitcake/laravel-cors": "^2.0",
         "guzzlehttp/guzzle": "^7.0.1",
+        "jumbojett/openid-connect-php": "^0.9.6",
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "minvws/uzi-php-laravel": "@dev"
+        "web-token/jwt-easy": "^2.2",
+        "web-token/jwt-signature-algorithm-rsa": "^2.2",
+        "web-token/jwt-key-mgmt": "^2.2",
+        "web-token/jwt-encryption": "^2.2",
+        "web-token/jwt-encryption-algorithm-rsa": "^2.2",
+        "web-token/jwt-encryption-algorithm-aescbc": "^2.2"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -60,12 +65,5 @@
         "sort-packages": true
     },
     "minimum-stability": "dev",
-    "prefer-stable": true,
-    "repositories": [{
-        "type": "path",
-        "url": "../uzi-php-laravel",
-        "options": {
-            "symlink": true
-        }
-    }]
+    "prefer-stable": true
 }
