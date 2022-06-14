@@ -23,7 +23,7 @@ Route::get('/login', function() {
     $oidc = new OpenIDConnectClient(provider_url: config('uzi.issuer'));
     $oidc->setClientID(config('uzi.client_id'));
     $oidc->setCodeChallengeMethod('S256');
-    $oidc->setRedirectURL(config('uzi.redirect_uri'));
+    $oidc->setRedirectURL(route('login'));
 
     // Redirect to login at max
     $oidc->authenticate();
