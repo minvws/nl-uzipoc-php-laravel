@@ -19,10 +19,10 @@ Please configure the following fields in the .env file:
 ```
 UZI_ISSUER=""
 UZI_CLIENT_ID=""
-UZI_DECRYPTION_KEY=""
+UZI_DECRYPTION_KEY_PATH=""
 ```
 
-The `UZI_DECRYPTION_KEY` needs to be the path to the private key file. For example `/secrets/key.pem`.
+The `UZI_DECRYPTION_KEY_PATH` needs to be the path to the private key file. For example `/secrets/key.pem`.
 
 ## Run locally
 You can run this project by running the following command:
