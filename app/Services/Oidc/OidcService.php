@@ -2,6 +2,7 @@
 
 namespace App\Services\Oidc;
 
+use Exception;
 use Illuminate\Support\Facades\Http;
 use Jose\Component\Core\AlgorithmManager;
 use Jose\Component\Core\JWKSet;
@@ -16,6 +17,7 @@ use Jose\Component\KeyManagement\JWKFactory;
 use Jose\Easy\Load;
 use Jose\Easy\ParameterBag;
 use Jose\Easy\Validate;
+use RuntimeException;
 
 class OidcService
 {
@@ -23,7 +25,7 @@ class OidcService
 
     public function __construct(
         protected string $issuer,
-        protected string $decryptionKey,
+        protected string $decryptionKeyPath,
     ) {
         $this->openIdConfiguration = $this->getOpenIdConfiguration();
     }
@@ -59,7 +61,7 @@ class OidcService
     }
 
     /**
-     * @throws \Exception
+     * @throws Exception
      */
     public function requestUserInfo(string $accessToken): ParameterBag
     {
@@ -83,13 +85,13 @@ class OidcService
     }
 
     /**
-     * Decrypts the given JWE and returns JWT.
-     * @throws \Exception
+     * Decrypts the given JWE string and returns JWT.
+     * @throws Exception
      */
-    private function decryptJwe(string $jwe): string
+    private function decryptJwe(string $jweString): string
     {
         // Decrypt JWE
-        $decryptionKey = JWKFactory::createFromKeyFile($this->decryptionKey);
+        $decryptionKey = JWKFactory::createFromKeyFile($this->decryptionKeyPath);
         $keyEncryptionAlgorithmManager = new AlgorithmManager([new RSAOAEP()]);
         $contentEncryptionAlgorithmManager = new AlgorithmManager([new A128CBCHS256()]);
         $compressionMethodManager = new CompressionMethodManager([new Deflate()]);
@@ -101,12 +103,12 @@ class OidcService
 
         $serializerManager = new JWESerializerManager([new CompactSerializer()]);
 
-        $jwe = $serializerManager->unserialize($jwe);
+        $jwe = $serializerManager->unserialize($jweString);
 
         // Success of decryption, $jwe is now decrypted
         $success = $jweDecrypter->decryptUsingKey($jwe, $decryptionKey, 0);
         if (!$success) {
-            throw new \Exception('Failed to decrypt JWE');
+            throw new RuntimeException('Failed to decrypt JWE');
         }
 
         return $jwe->getPayload();
