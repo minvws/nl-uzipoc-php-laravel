@@ -17,6 +17,8 @@ use Jose\Component\KeyManagement\JWKFactory;
 use Jose\Easy\Load;
 use Jose\Easy\ParameterBag;
 use Jose\Easy\Validate;
+use Jumbojett\Interfaces\HandleJweResponseInterface;
+use Jumbojett\OpenIDConnectClient;
 use RuntimeException;
 
 class OidcService
@@ -35,53 +37,71 @@ class OidcService
         $response = Http::get($this->issuer . '/.well-known/openid-configuration');
 
         return new OpenIdConfiguration(
-            version: $response->json('version'),
-            tokenEndpointAuthMethodsSupported: $response->json('token_endpoint_auth_methods_supported'),
-            claimsParameterSupported: $response->json('claims_parameter_supported'),
-            requestParameterSupported: $response->json('request_parameter_supported'),
-            requestUriParameterSupported: $response->json('request_uri_parameter_supported'),
-            requireRequestUriRegistration: $response->json('require_request_uri_registration'),
-            grantTypesSupported: $response->json('grant_types_supported'),
-            frontchannelLogoutSupported: $response->json('frontchannel_logout_supported'),
-            frontchannelLogoutSessionSupported: $response->json('frontchannel_logout_session_supported'),
-            backchannelLogoutSupported: $response->json('backchannel_logout_supported'),
-            backchannelLogoutSessionSupported: $response->json('backchannel_logout_session_supported'),
-            issuer: $response->json('issuer'),
-            authorizationEndpoint: $response->json('authorization_endpoint'),
-            jwksUri: $response->json('jwks_uri'),
-            tokenEndpoint: $response->json('token_endpoint'),
-            scopesSupported: $response->json('scopes_supported'),
-            responseTypesSupported: $response->json('response_types_supported'),
-            responseModesSupported: $response->json('response_modes_supported'),
-            subjectTypesSupported: $response->json('subject_types_supported'),
-            idTokenSigningAlgValuesSupported: $response->json('id_token_signing_alg_values_supported'),
-            userinfoEndpoint: $response->json('userinfo_endpoint'),
-            codeChallengeMethodsSupported: $response->json('code_challenge_methods_supported')
+            version: $response->json('version', ''),
+            tokenEndpointAuthMethodsSupported: $response->json('token_endpoint_auth_methods_supported', []),
+            claimsParameterSupported: $response->json('claims_parameter_supported', false),
+            requestParameterSupported: $response->json('request_parameter_supported', false),
+            requestUriParameterSupported: $response->json('request_uri_parameter_supported', false),
+            requireRequestUriRegistration: $response->json('require_request_uri_registration', false),
+            grantTypesSupported: $response->json('grant_types_supported', []),
+            frontchannelLogoutSupported: $response->json('frontchannel_logout_supported', false),
+            frontchannelLogoutSessionSupported: $response->json('frontchannel_logout_session_supported', false),
+            backchannelLogoutSupported: $response->json('backchannel_logout_supported', false),
+            backchannelLogoutSessionSupported: $response->json('backchannel_logout_session_supported', false),
+            issuer: $response->json('issuer', ''),
+            authorizationEndpoint: $response->json('authorization_endpoint', ''),
+            jwksUri: $response->json('jwks_uri', ''),
+            tokenEndpoint: $response->json('token_endpoint', ''),
+            scopesSupported: $response->json('scopes_supported', []),
+            responseTypesSupported: $response->json('response_types_supported', []),
+            responseModesSupported: $response->json('response_modes_supported', []),
+            subjectTypesSupported: $response->json('subject_types_supported', []),
+            idTokenSigningAlgValuesSupported: $response->json('id_token_signing_alg_values_supported', []),
+            userinfoEndpoint: $response->json('userinfo_endpoint', ''),
+            codeChallengeMethodsSupported: $response->json('code_challenge_methods_supported', [])
         );
     }
 
     /**
      * @throws Exception
      */
-    public function requestUserInfo(string $accessToken): ParameterBag
+    public function requestUserInfo(string $accessToken): object
     {
         // Get user info endpoint
-        $jwe = Http::withToken($accessToken)->get($this->openIdConfiguration->userinfoEndpoint . '?schema=openid');
+        $response = Http::withToken($accessToken)->get($this->openIdConfiguration->userinfoEndpoint . '?schema=openid');
 
-        // Decrypt jwe to jwt
-        $jwt = $this->decryptJwe($jwe);
+        if (str_contains($response->header('Content-Type'), 'application/json')) {
+            return $response->object();
+        }
 
-        // Verify JWT
-        /** @var Validate $jws */
-        $jws = Load::jws($jwt)
-            ->algs(['RS256'])
-            ->exp()
-            ->iss($this->issuer)
-            ->keyset($this->getJwkSet());
+        if (str_contains($response->header('Content-Type'), 'application/jwt')) {
+            // Get jwt header
+            $jwtHeader = json_decode(base64_decode(explode('.', $response->body())[0]), false);
 
-        $jwt = $jws->run();
+            // Check if jwt header contains enc field
+            if (isset($jwtHeader->enc)) {
+                // Decrypt jwe, we now have the nested signed jwt
+                $jwt = $this->decryptJwe($response->body());
+            } else {
+                // When we do not have a enc field, we have a signed jwt
+                $jwt = $response->body();
+            }
 
-        return $jwt->claims;
+            // Validate signed jwt
+            /** @var Validate $jws */
+            $jws = Load::jws($jwt)
+                ->algs(['RS256'])
+                ->exp()
+                ->iss($this->issuer)
+                ->keyset($this->getJwkSet());
+
+            $jwt = $jws->run();
+
+            // Return the claims as object
+            return (object) $jwt->claims->all();
+        }
+
+        throw new RuntimeException('Unsupported content type');
     }
 
     /**

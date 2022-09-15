@@ -20,10 +20,17 @@ Route::get('/', function () {
 });
 
 Route::get('/login', function() {
-    $oidc = new OpenIDConnectClient(provider_url: config('uzi.issuer'));
-    $oidc->setClientID(config('uzi.client_id'));
+    $oidc = new OpenIDConnectClient(provider_url: config('oidc.issuer'));
+    $oidc->setClientID(config('oidc.client_id'));
+    if (!empty(config('oidc.client_secret'))) {
+        $oidc->setClientSecret(config('oidc.client_secret'));
+    }
     $oidc->setCodeChallengeMethod('S256');
     $oidc->setRedirectURL(route('login'));
+
+    foreach (config('uzi.additional_scopes') as $scope) {
+        $oidc->addScope($scope);
+    }
 
     // Redirect to login at max
     $oidc->authenticate();
@@ -37,7 +44,7 @@ Route::get('/login', function() {
     // Custom OIDC service to request user info
     $oidcService = new OidcService(
         issuer: config('uzi.issuer'),
-        decryptionKey: config('uzi.decryption_key'),
+        decryptionKeyPath: config('uzi.decryption_key_path'),
     );
 
     // Get user information
