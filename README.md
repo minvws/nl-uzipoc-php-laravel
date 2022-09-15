@@ -1,5 +1,6 @@
-# UziPoc Laravel / PHP client example
+# UziPoc Laravel / PHP OpenID connect client example
 This client provides an example how to connect to the https://github.com/minvws/nl-uzipoc-max OIDC service.
+Or another OpenID Connect service that uses PKCE flow.
 
 ## Requirements
 This PHP example is tested with `php 8.0`.
@@ -17,12 +18,14 @@ UziPoc OIDC service. The matching key needs te be configured in the .env.
 
 Please configure the following fields in the .env file:
 ```
-UZI_ISSUER=""
-UZI_CLIENT_ID=""
-UZI_DECRYPTION_KEY_PATH=""
+OIDC_ISSUER=""
+OIDC_CLIENT_ID=""
+OIDC_CLIENT_SECRET=""
+OIDC_ADDITIONAL_SCOPES=""
+OIDC_DECRYPTION_KEY_PATH=""
 ```
 
-The `UZI_DECRYPTION_KEY_PATH` needs to be the path to the private key file. For example `/secrets/key.pem`.
+The `OIDC_DECRYPTION_KEY_PATH` needs to be the path to the private key file (e.g. `/secrets/key.pem`) if the user info is encrypted.
 
 ## Run locally
 You can run this project by running the following command:
