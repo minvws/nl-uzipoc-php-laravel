@@ -15,10 +15,7 @@ use Jose\Component\Encryption\Serializer\CompactSerializer;
 use Jose\Component\Encryption\Serializer\JWESerializerManager;
 use Jose\Component\KeyManagement\JWKFactory;
 use Jose\Easy\Load;
-use Jose\Easy\ParameterBag;
 use Jose\Easy\Validate;
-use Jumbojett\Interfaces\HandleJweResponseInterface;
-use Jumbojett\OpenIDConnectClient;
 use RuntimeException;
 
 class OidcService
