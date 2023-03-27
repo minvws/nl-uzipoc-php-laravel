@@ -28,7 +28,7 @@ Route::get('/login', function() {
     $oidc->setCodeChallengeMethod('S256');
     $oidc->setRedirectURL(route('login'));
 
-    foreach (config('uzi.additional_scopes') as $scope) {
+    foreach (config('oidc.additional_scopes') as $scope) {
         $oidc->addScope($scope);
     }
 
@@ -43,8 +43,8 @@ Route::get('/login', function() {
 
     // Custom OIDC service to request user info
     $oidcService = new OidcService(
-        issuer: config('uzi.issuer'),
-        decryptionKeyPath: config('uzi.decryption_key_path'),
+        issuer: config('oidc.issuer'),
+        decryptionKeyPath: config('oidc.decryption_key_path'),
     );
 
     // Get user information
