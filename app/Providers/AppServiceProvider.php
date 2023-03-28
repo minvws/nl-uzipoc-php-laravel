@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Http\Responses\LoginResponse;
 use Illuminate\Support\ServiceProvider;
+use MinVWS\OpenIDConnectLaravel\Http\Responses\LoginResponseInterface;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -13,7 +15,7 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+        $this->app->bind(LoginResponseInterface::class, LoginResponse::class);
     }
 
     /**
