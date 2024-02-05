@@ -22,5 +22,5 @@ Route::get('/user', function() {
         return redirect()->route('oidc.login');
     }
 
-    dump(session('user'));
+    return response()->json(session('user'));
 })->name('user');
