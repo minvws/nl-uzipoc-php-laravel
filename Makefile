@@ -7,7 +7,7 @@ run:
 	php artisan serve
 
 docker-build:
-	docker build -t oidc-client .
+	docker build -t minvws/nl-uzipoc-php-laravel .
 
 docker-run:
-	docker run -it -p 8000:8000 oidc-client
+	docker run -it --volume "${PWD}/key.pem:/var/key.pem" -p 8000:8000 minvws/nl-uzipoc-php-laravel
