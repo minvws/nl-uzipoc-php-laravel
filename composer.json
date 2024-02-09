@@ -7,17 +7,11 @@
     "require": {
         "php": "^8.0",
         "fruitcake/laravel-cors": "^2.0",
-        "guzzlehttp/guzzle": "^7.0.1",
-        "jumbojett/openid-connect-php": "^0.9.6",
+        "guzzlehttp/guzzle": "^7.8",
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "web-token/jwt-easy": "^2.2",
-        "web-token/jwt-signature-algorithm-rsa": "^2.2",
-        "web-token/jwt-key-mgmt": "^2.2",
-        "web-token/jwt-encryption": "^2.2",
-        "web-token/jwt-encryption-algorithm-rsa": "^2.2",
-        "web-token/jwt-encryption-algorithm-aescbc": "^2.2"
+        "minvws/openid-connect-php-laravel": "^0.1.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
@@ -64,6 +58,12 @@
         "preferred-install": "dist",
         "sort-packages": true
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    "minimum-stability": "stable",
+    "prefer-stable": true,
+    "repositories": [
+        {
+            "type": "git",
+            "url": "git@github.com:minvws/nl-rdo-openid-connect-php-laravel.git"
+        }
+    ]
 }
