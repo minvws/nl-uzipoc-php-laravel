@@ -59,11 +59,5 @@
         "sort-packages": true
     },
     "minimum-stability": "stable",
-    "prefer-stable": true,
-    "repositories": [
-        {
-            "type": "git",
-            "url": "git@github.com:minvws/nl-rdo-openid-connect-php-laravel.git"
-        }
-    ]
+    "prefer-stable": true
 }
