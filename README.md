@@ -2,6 +2,10 @@
 This client provides an example how to connect to the https://github.com/minvws/nl-uzipoc-max OIDC service.
 Or another OpenID Connect service that uses PKCE flow.
 
+> [!CAUTION]
+> This project is a proof of concept and should not be used in production. This project currently runs on an older Laravel version and will be updated in the future.
+
+
 ## Requirements
 This PHP example is tested with `php 8.0`.
 
