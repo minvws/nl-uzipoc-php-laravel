@@ -13,7 +13,6 @@ WORKDIR /app
 COPY . /app
 
 RUN composer install
-RUN php artisan key:generate
 
 EXPOSE 8000
 CMD /scripts/startup.sh
