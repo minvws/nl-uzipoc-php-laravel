@@ -10,4 +10,4 @@ docker-build:
 	docker build -t minvws/nl-uzipoc-php-laravel -f docker/Dockerfile .
 
 docker-run:
-	docker run -it --volume "${PWD}/docker/key.pem:/var/key.pem" --volume "${PWD}/.env:/app/.env" -p 8000:8000 minvws/nl-uzipoc-php-laravel
+	docker run -it --rm --volume "${PWD}/docker/key.pem:/var/key.pem" --volume "${PWD}/.env:/app/.env" -p 8000:8000 minvws/nl-uzipoc-php-laravel
