@@ -1769,16 +1769,16 @@
         },
         {
             "name": "minvws/openid-connect-php-laravel",
-            "version": "v0.1.0",
+            "version": "v0.1.1",
             "source": {
                 "type": "git",
                 "url": "https://github.com/minvws/nl-rdo-openid-connect-php-laravel.git",
-                "reference": "0a0ed8d507206977e49363b8908ad52a5ad7fa34"
+                "reference": "abfc1072c3322c492989a875f273223729fef2e4"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/minvws/nl-rdo-openid-connect-php-laravel/zipball/0a0ed8d507206977e49363b8908ad52a5ad7fa34",
-                "reference": "0a0ed8d507206977e49363b8908ad52a5ad7fa34",
+                "url": "https://api.github.com/repos/minvws/nl-rdo-openid-connect-php-laravel/zipball/abfc1072c3322c492989a875f273223729fef2e4",
+                "reference": "abfc1072c3322c492989a875f273223729fef2e4",
                 "shasum": ""
             },
             "require": {
@@ -1825,9 +1825,9 @@
             "description": "OpenID Connect client for Laravel",
             "support": {
                 "issues": "https://github.com/minvws/nl-rdo-openid-connect-php-laravel/issues",
-                "source": "https://github.com/minvws/nl-rdo-openid-connect-php-laravel/tree/v0.1.0"
+                "source": "https://github.com/minvws/nl-rdo-openid-connect-php-laravel/tree/v0.1.1"
             },
-            "time": "2024-01-02T11:45:54+00:00"
+            "time": "2024-02-13T11:45:01+00:00"
         },
         {
             "name": "monolog/monolog",
@@ -5808,7 +5808,7 @@
         },
         {
             "name": "web-token/jwt-core",
-            "version": "3.2.9",
+            "version": "3.2.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/web-token/jwt-core.git",
@@ -5872,7 +5872,7 @@
                 "symfony"
             ],
             "support": {
-                "source": "https://github.com/web-token/jwt-core/tree/3.2.9"
+                "source": "https://github.com/web-token/jwt-core/tree/3.2.10"
             },
             "funding": [
                 {
@@ -5884,7 +5884,7 @@
         },
         {
             "name": "web-token/jwt-encryption",
-            "version": "3.2.9",
+            "version": "3.2.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/web-token/jwt-encryption.git",
@@ -5952,7 +5952,7 @@
                 "symfony"
             ],
             "support": {
-                "source": "https://github.com/web-token/jwt-encryption/tree/3.2.9"
+                "source": "https://github.com/web-token/jwt-encryption/tree/3.2.10"
             },
             "funding": [
                 {
@@ -5964,7 +5964,7 @@
         },
         {
             "name": "web-token/jwt-encryption-algorithm-aescbc",
-            "version": "3.2.9",
+            "version": "3.2.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/web-token/jwt-encryption-algorithm-aescbc.git",
@@ -6022,7 +6022,7 @@
                 "symfony"
             ],
             "support": {
-                "source": "https://github.com/web-token/jwt-encryption-algorithm-aescbc/tree/3.2.9"
+                "source": "https://github.com/web-token/jwt-encryption-algorithm-aescbc/tree/3.2.10"
             },
             "funding": [
                 {
@@ -6034,7 +6034,7 @@
         },
         {
             "name": "web-token/jwt-encryption-algorithm-rsa",
-            "version": "3.2.9",
+            "version": "3.2.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/web-token/jwt-encryption-algorithm-rsa.git",
@@ -6098,7 +6098,7 @@
                 "symfony"
             ],
             "support": {
-                "source": "https://github.com/web-token/jwt-encryption-algorithm-rsa/tree/3.2.9"
+                "source": "https://github.com/web-token/jwt-encryption-algorithm-rsa/tree/3.2.10"
             },
             "funding": [
                 {
@@ -6110,16 +6110,16 @@
         },
         {
             "name": "web-token/jwt-key-mgmt",
-            "version": "3.2.9",
+            "version": "3.2.10",
             "source": {
                 "type": "git",
                 "url": "https://github.com/web-token/jwt-key-mgmt.git",
-                "reference": "2a034fdbf5142e39152b62cde066d2e707cfacb9"
+                "reference": "7ccd50f9ebf089cb864e3d3c62017192ac7cb450"
             },
             "dist": {
                 "type": "zip",
-                "url": "https://api.github.com/repos/web-token/jwt-key-mgmt/zipball/2a034fdbf5142e39152b62cde066d2e707cfacb9",
-                "reference": "2a034fdbf5142e39152b62cde066d2e707cfacb9",
+                "url": "https://api.github.com/repos/web-token/jwt-key-mgmt/zipball/7ccd50f9ebf089cb864e3d3c62017192ac7cb450",
+                "reference": "7ccd50f9ebf089cb864e3d3c62017192ac7cb450",
                 "shasum": ""
             },
             "require": {
@@ -6176,7 +6176,7 @@
                 "symfony"
             ],
             "support": {
-                "source": "https://github.com/web-token/jwt-key-mgmt/tree/3.2.9"
+                "source": "https://github.com/web-token/jwt-key-mgmt/tree/3.2.10"
             },
             "funding": [
                 {
@@ -6184,7 +6184,7 @@
                     "type": "patreon"
                 }
             ],
-            "time": "2024-01-04T15:42:08+00:00"
+            "time": "2024-02-12T21:58:26+00:00"
         },
         {
             "name": "webmozart/assert",
