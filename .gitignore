@@ -4,3 +4,6 @@ vendor/*
 ssl/*
 env/*
 .env
+*.pem
+*.crt
+*.key

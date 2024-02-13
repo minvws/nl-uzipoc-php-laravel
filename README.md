@@ -9,11 +9,9 @@ Or another OpenID Connect service that uses PKCE flow.
 ## Requirements
 This PHP example is tested with `php 8.0`.
 
-After checkout, please run the following commands to install the dependencies:
+After checkout, please run the following command to install the dependencies:
 ```
-cp .env.example .env
-composer install
-php artisan key:generate
+make setup
 ```
 
 ## Registration
@@ -34,7 +32,7 @@ The `OIDC_DECRYPTION_KEY_PATH` needs to be the path to the private key file (e.g
 ## Run locally
 You can run this project by running the following command:
 ```
-php artisan serve
+make run
 ```
 
 To visit the login page, open the browser and navigate to `http://localhost:8000/login`.
