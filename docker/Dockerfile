@@ -12,7 +12,7 @@ COPY --from=composer:latest /usr/bin/composer /usr/bin/composer
 WORKDIR /app
 COPY . /app
 
-RUN composer install
+RUN composer install --no-dev --no-interaction --no-progress --no-suggest --no-scripts --optimize-autoloader
 
 EXPOSE 8000
 CMD /app/docker/scripts/startup.sh
