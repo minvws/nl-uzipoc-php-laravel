@@ -1,11 +1,12 @@
 #!/bin/bash
 
-# set application directory
 APP_DIR=${APP_DIR:-/app}
 
-# set default app host and port when not set
-APP_HOST=${APP_HOST:-0.0.0.0}
-APP_PORT=${APP_PORT:-8000}
+# Needs to be 0.0.0.0 for Docker
+ARTISAN_SERVE_HOST=0.0.0.0
+# Needs to be the port that is exposed in the Dockerfile
+ARTISAN_SERVE_PORT=8000
+ARTISAN_SERVE_NO_RELOAD=${ARTISAN_SERVE_NO_RELOAD:-true}
 
 cd $APP_DIR
 
@@ -31,6 +32,13 @@ if [ ! -f $APP_DIR/.env ]; then
   cp $APP_DIR/.env.ci $APP_DIR/.env
 fi
 
+# set no reload argument if ARTISAN_SERVE_NO_RELOAD is set to true
+# with no reload the server will use all the environment variables
+ARTISAN_NO_RELOAD_ARGUMENT=''
+if [ "$ARTISAN_SERVE_NO_RELOAD" = "true" ]; then
+  ARTISAN_NO_RELOAD_ARGUMENT='--no-reload'
+fi
+
 # run the application
 # FYI: you should not use php artisan serve in production
-php artisan serve --host=$APP_HOST --port=$APP_PORT
+php artisan serve --host=$ARTISAN_SERVE_HOST --port=$ARTISAN_SERVE_PORT $ARTISAN_NO_RELOAD_ARGUMENT
