@@ -19,7 +19,7 @@ if [ -n "$OIDC_DECRYPTION_KEY_CONTENT" ]; then
   fi
 
   # if so, write it to a file
-  echo $OIDC_DECRYPTION_KEY_CONTENT > $APP_DIR/secrets/oidc-decryption-key.pem
+  echo "$OIDC_DECRYPTION_KEY_CONTENT" > $APP_DIR/secrets/oidc-decryption-key.pem
 
   # set OIDC_DECRYPTION_KEY_PATH
   OIDC_DECRYPTION_KEY_PATH=$APP_DIR/secrets/oidc-decryption-key.pem
