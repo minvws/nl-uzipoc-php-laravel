@@ -11,10 +11,24 @@ class TrustHosts extends Middleware
      *
      * @return array
      */
-    public function hosts()
+    public function hosts(): array
     {
         return [
-            $this->allSubdomainsOfApplicationUrl(),
+            $this->onlyAllowApplicationUrl(),
         ];
+    }
+
+    /**
+     * Normally we use allSubdomainsOfApplicationUrl() of Laravel.
+     * We currently do not want to allow all subdomains and only allow the application url.
+     * Prevents Host Header Injection - WSTG-INPV-17
+     */
+    protected function onlyAllowApplicationUrl(): ?string
+    {
+        if ($host = parse_url(config('app.url'), PHP_URL_HOST)) {
+            return '^' . preg_quote($host) . '$';
+        }
+
+        return null;
     }
 }
