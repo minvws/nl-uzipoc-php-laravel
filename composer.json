@@ -11,7 +11,7 @@
         "laravel/framework": "^8.54",
         "laravel/sanctum": "^2.11",
         "laravel/tinker": "^2.5",
-        "minvws/openid-connect-php-laravel": "^0.1.0"
+        "minvws/openid-connect-php-laravel": "^0.3.0"
     },
     "require-dev": {
         "facade/ignition": "^2.5",
