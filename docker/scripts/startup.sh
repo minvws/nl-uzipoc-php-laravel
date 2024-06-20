@@ -26,6 +26,22 @@ if [ -n "$OIDC_DECRYPTION_KEY_CONTENT" ]; then
   export OIDC_DECRYPTION_KEY_PATH
 fi
 
+# check if OIDC_SIGNING_KEY_CONTENT is set
+if [ -n "$OIDC_SIGNING_KEY_CONTENT" ]; then
+  # check if secrets directory exists
+  if [ ! -d $APP_DIR/secrets ]; then
+    # if not, create it
+    mkdir $APP_DIR/secrets
+  fi
+
+  # if so, write it to a file
+  echo "$OIDC_SIGNING_KEY_CONTENT" > $APP_DIR/secrets/oidc-signing-key.pem
+
+  # set OIDC_SIGNING_PRIVATE_KEY_PATH
+  OIDC_SIGNING_PRIVATE_KEY_PATH=$APP_DIR/secrets/oidc-signing-key.pem
+  export OIDC_SIGNING_PRIVATE_KEY_PATH
+fi
+
 # check if .env file exists
 if [ ! -f $APP_DIR/.env ]; then
   # if not, copy the example file
