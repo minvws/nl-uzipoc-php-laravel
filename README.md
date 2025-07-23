@@ -1,5 +1,5 @@
 # UziPoc Laravel / PHP OpenID connect client example
-This client provides an example how to connect to the https://github.com/minvws/nl-uzipoc-max OIDC service.
+This client provides an example of how to connect to the https://github.com/minvws/nl-uzipoc-max OIDC service.
 Or another OpenID Connect service that uses PKCE flow.
 
 > [!CAUTION]
@@ -15,8 +15,8 @@ make setup
 ```
 
 ## Registration
-To use this client an RSA certificate needs to be provided to the
-UziPoc OIDC service. The matching key needs te be configured in the .env.
+To use this client, an RSA certificate needs to be provided to the
+UziPoc OIDC service. The matching key needs to be configured in the .env.
 
 Please configure the following fields in the .env file:
 ```
